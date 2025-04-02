@@ -20,3 +20,33 @@ The Cloud Engineering team is not accountable for maintaining or updating labels
 
 For ongoing compliance, it is the responsibility of individual application or resource owners to ensure proper tagging on their GCP assets.
 
+
+
+Audit Logs Streaming to Splunk – Architecture and Workflow Documentation
+
+Overview
+This document outlines the process implemented by the Cloud Engineering team to stream GCP audit logs to Splunk using a combination of Log Sinks, Pub/Sub, and a Dataflow job. The setup ensures centralized log collection and enables real-time visibility for security and operational monitoring.
+
+Architecture Components
+Log Sink (Organization Level)
+
+A centralized log sink is created at the organization level.
+
+The sink routes all audit logs to a Pub/Sub topic.
+
+This setup ensures that logs from all projects within the organization are captured without the need to configure sinks at the individual project level.
+
+Link to Log Sink Configuration:
+[Insert Log Sink Link Here]
+
+Pub/Sub Topic
+
+The designated Pub/Sub topic acts as the buffer and transport layer for the streamed audit logs.
+
+All audit log entries from the log sink are pushed to this topic in real time.
+
+Dataflow Job
+
+A Dataflow pipeline subscribes to the Pub/Sub topic and reads the incoming audit logs.
+
+The job is responsible for formatting and forwarding the logs to Splunk
